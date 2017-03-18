@@ -29,7 +29,7 @@ namespace AI_Project
     public class SectionedImage
     {
         Bitmap imageBitmap;
-        public List<ImageBlock> blocks;
+        public List<ImageBlock> blocks = new List<ImageBlock>();
         public float x = 0, y = 0;//for entire image vector
 
         public SectionedImage(Bitmap bm)
@@ -97,7 +97,7 @@ namespace AI_Project
     {
         Bitmap blockBitmap;
         int x, y;//coordinates in parent image
-        List<float> gxs, gys, magnitudes, directions;
+        List<float> gxs = new List<float>() , gys = new List<float>(), magnitudes = new List<float>(), directions = new List<float>();
         public float gxSum, gySum, blockMagnitude, blockDirection;
 
         public ImageBlock(Bitmap bm, int x, int y)

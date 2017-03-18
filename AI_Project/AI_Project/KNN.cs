@@ -8,8 +8,8 @@ namespace AI_Project
 {
     class KNN
     {
-        public List<SectionedImage> trainingImages, testingImages;
-        public List<ClassifiedTestingImage> ClassifiedImagePairs;
+        public List<SectionedImage> trainingImages = new List<SectionedImage>(), testingImages = new List<SectionedImage>();
+        public List<ClassifiedTestingImage> ClassifiedImagePairs = new List<ClassifiedTestingImage>();
         //trainingImages one for each character
 
         public List<ClassifiedTestingImage> RunKNN(List<string> trainingImagesPaths, List<string> testingImagesPaths)

@@ -21,8 +21,8 @@ namespace AI_Project
             {
                 for (int j = 0; j < myBitmap.Height; j++)
                 {
-                    if (myBitmap.GetPixel(i, j) != Color.White)
-                        myBitmap.SetPixel(i, j, Color.Black);
+                    //if (myBitmap.GetPixel(i, j) != Color.White)
+                        //myBitmap.SetPixel(i, j, Color.Black);
                 }
             }
             return myBitmap;
