@@ -16,7 +16,7 @@ namespace AI_Project
         {
             foreach(string p in paths)
             {
-                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage(p)));
+                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p)));
             }
             return sectionedImages;
         }
