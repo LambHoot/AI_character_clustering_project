@@ -10,9 +10,18 @@ namespace AI_Project
 {
     class GradientHistogram
     {
+        public List<SectionedImage> sectionedImages;
+
+        public List<SectionedImage> ExtractFeaturesForImages(List<string> paths)
+        {
+            foreach(string p in paths)
+            {
+                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage(p)));
+            }
+            return sectionedImages;
+        }
+
     }
-
-
 
 
     public class SectionedImage
