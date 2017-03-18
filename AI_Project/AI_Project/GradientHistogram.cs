@@ -114,7 +114,7 @@ namespace AI_Project
                 }
             }
             //you got all the lists filled out!
-            blockMagnitude = (float)Math.Sqrt((gxs.Sum() * gxs.Sum()) + (gys.Sum() * gys.Sum());
+            blockMagnitude = (float)Math.Sqrt((gxs.Sum() * gxs.Sum()) + (gys.Sum() * gys.Sum()));
             blockDirection = (float)Math.Atan(gys.Sum() / gxs.Sum());
         }
 
