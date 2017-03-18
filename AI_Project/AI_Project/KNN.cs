@@ -12,7 +12,7 @@ namespace AI_Project
         public List<ClassifiedTestingImage> ClassifiedImagePairs;
         //trainingImages one for each character
 
-        public void RunKNN(List<string> trainingImagesPaths, List<string> testingImagesPaths)
+        public List<ClassifiedTestingImage> RunKNN(List<string> trainingImagesPaths, List<string> testingImagesPaths)
         {
             ExtractFeatures(trainingImagesPaths, testingImagesPaths);
             //have all training and testing sectionedImages with features
@@ -28,8 +28,9 @@ namespace AI_Project
                     if (getEuclideanDistance(testImage, trainImage) < getEuclideanDistance(pair.testingImage, pair.classifiedTrainingImage))
                         pair.classifiedTrainingImage = trainImage;
                 }
+                ClassifiedImagePairs.Add(pair);
             }
-            ClassifiedImagePairs.Add(pair);
+            return ClassifiedImagePairs;
         }
 
 
