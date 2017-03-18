@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Numerics;
 
 namespace AI_Project
 {
@@ -28,13 +29,23 @@ namespace AI_Project
 
         public void generateBlocks()
         {
+            float maxMag = 0, minMag = 10000000;
             for(int i =0; i < imageBitmap.Width; i += 7)
             {
                 for (int j = 0; j < imageBitmap.Height; j += 7)
                 {
                     ImageBlock ib = new ImageBlock(Copy(imageBitmap, new Rectangle(i,j,7,7)), i%7, j%7);
                     blocks.Add(ib);
+                    if (ib.blockMagnitude > maxMag)
+                        maxMag = ib.blockMagnitude;
+                    if (ib.blockMagnitude < minMag)
+                        minMag = ib.blockMagnitude;
                 }
+            }
+            //normalize all blockVectors
+            foreach(ImageBlock ib in blocks)
+            {
+                ib.NormalizeBlockMagnitude(minMag, maxMag);
             }
         }
 
@@ -65,6 +76,7 @@ namespace AI_Project
         Bitmap blockBitmap;
         int x, y;//coordinates in parent image
         List<float> gxs, gys, magnitudes, directions;
+        public float blockMagnitude, blockDirection;
 
         public ImageBlock(Bitmap bm, int x, int y)
         {
@@ -92,8 +104,11 @@ namespace AI_Project
                     directions.Add(dir);
                 }
             }
-
+            //you got all the lists filled out!
+            blockMagnitude = (float)Math.Sqrt((gxs.Sum() * gxs.Sum()) + (gys.Sum() * gys.Sum());
+            blockDirection = (float)Math.Atan(gys.Sum() / gxs.Sum());
         }
+
 
         public int GetPixelCustom(int i, int j)
         {
@@ -104,6 +119,11 @@ namespace AI_Project
             if (blockBitmap.GetPixel(i, j) == Color.Black)
                 return 1;
             return 0;
+        }
+
+        public void NormalizeBlockMagnitude(float min, float max)
+        {
+            blockMagnitude = (blockMagnitude - min) / (max - min);
         }
 
 
