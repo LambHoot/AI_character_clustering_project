@@ -28,9 +28,9 @@ namespace AI_Project
 
         public void generateBlocks()
         {
-            for(int i =0; i < imageBitmap.Height; i += 7)
+            for(int i =0; i < imageBitmap.Width; i += 7)
             {
-                for (int j = 0; j < imageBitmap.Width; j += 7)
+                for (int j = 0; j < imageBitmap.Height; j += 7)
                 {
                     ImageBlock ib = new ImageBlock(Copy(imageBitmap, new Rectangle(i,j,7,7)), i%7, j%7);
                     blocks.Add(ib);
@@ -76,14 +76,34 @@ namespace AI_Project
 
         public void calculateGradientStuff()
         {
-            for (int i = 0; i < blockBitmap.Height; i++)
+            for (int i = 0; i < blockBitmap.Width; i++)
             {
-                for (int j = 0; j < blockBitmap.Width; j++)
+                for (int j = 0; j < blockBitmap.Height; j++)
                 {
-                    
+                    float gx = GetPixelCustom(i - 1, j + 1) + 2 * GetPixelCustom(i, j + 1) + GetPixelCustom(i + 1, j + 1)
+                        - GetPixelCustom(i - 1, j - 1) - 2 * GetPixelCustom(i, j - 1) - GetPixelCustom(i + 1, j - 1);
+                    float gy = GetPixelCustom(i - 1, j - 1) + 2 * GetPixelCustom(i-1, j) + GetPixelCustom(i - 1, j + 1)
+                        - GetPixelCustom(i + 1, j - 1) - 2 * GetPixelCustom(i + 1, j) - GetPixelCustom(i + 1, j + 1);
+                    float g = (float)Math.Sqrt((gx*gx)+(gy*gy));
+                    float dir = (float)Math.Atan(gy / gx);
+                    gxs.Add(gx);
+                    gys.Add(gy);
+                    magnitudes.Add(g);
+                    directions.Add(dir);
                 }
             }
 
+        }
+
+        public int GetPixelCustom(int i, int j)
+        {
+            if (i < 0 || i >= blockBitmap.Width)
+                return 0;
+            if (j < 0 || j >= blockBitmap.Height)
+                return 0;
+            if (blockBitmap.GetPixel(i, j) == Color.Black)
+                return 1;
+            return 0;
         }
 
 

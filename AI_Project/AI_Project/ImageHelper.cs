@@ -17,9 +17,9 @@ namespace AI_Project
 
         public static Bitmap normalizeImageColor(Bitmap myBitmap)
         {
-            for (int i = 0; i < myBitmap.Height; i++)
+            for (int i = 0; i < myBitmap.Width; i++)
             {
-                for (int j = 0; j < myBitmap.Width; j++)
+                for (int j = 0; j < myBitmap.Height; j++)
                 {
                     if (myBitmap.GetPixel(i, j) != Color.White)
                         myBitmap.SetPixel(i, j, Color.Black);
