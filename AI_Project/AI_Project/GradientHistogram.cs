@@ -10,16 +10,18 @@ namespace AI_Project
 {
     class GradientHistogram
     {
-        public List<SectionedImage> sectionedImages;
 
-        public List<SectionedImage> ExtractFeaturesForImages(List<string> paths)
+        public static List<SectionedImage> ExtractFeaturesForImages(List<string> paths)
         {
-            foreach(string p in paths)
+            List<SectionedImage> sectionedImages = new List<SectionedImage>();
+            foreach (string p in paths)
             {
                 sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p)));
             }
             return sectionedImages;
         }
+
+
 
     }
 
@@ -27,12 +29,14 @@ namespace AI_Project
     public class SectionedImage
     {
         Bitmap imageBitmap;
-        List<ImageBlock> blocks;
+        public List<ImageBlock> blocks;
+        public float x = 0, y = 0;//for entire image vector
 
         public SectionedImage(Bitmap bm)
         {
             imageBitmap = bm;
             generateBlocks();
+            GetTotalVector();
         }
 
 
@@ -75,6 +79,15 @@ namespace AI_Project
             return bmp;
         }
 
+        public void GetTotalVector()
+        {
+            foreach (ImageBlock ib in blocks)
+            {
+                x += ib.gxSum;
+                y += ib.gySum;
+            }
+        }
+
 
     }
 
@@ -85,7 +98,7 @@ namespace AI_Project
         Bitmap blockBitmap;
         int x, y;//coordinates in parent image
         List<float> gxs, gys, magnitudes, directions;
-        public float blockMagnitude, blockDirection;
+        public float gxSum, gySum, blockMagnitude, blockDirection;
 
         public ImageBlock(Bitmap bm, int x, int y)
         {
@@ -114,8 +127,10 @@ namespace AI_Project
                 }
             }
             //you got all the lists filled out!
-            blockMagnitude = (float)Math.Sqrt((gxs.Sum() * gxs.Sum()) + (gys.Sum() * gys.Sum()));
-            blockDirection = (float)Math.Atan(gys.Sum() / gxs.Sum());
+            gxSum = gxs.Sum();
+            gySum = gys.Sum();
+            blockMagnitude = (float)Math.Sqrt((gxSum * gxSum) + (gySum * gySum));
+            blockDirection = (float)Math.Atan(gySum / gxSum);
         }
 
 
