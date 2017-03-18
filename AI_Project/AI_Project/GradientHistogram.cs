@@ -16,7 +16,7 @@ namespace AI_Project
             List<SectionedImage> sectionedImages = new List<SectionedImage>();
             foreach (string p in paths)
             {
-                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p)));
+                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p), p));
             }
             return sectionedImages;
         }
@@ -31,12 +31,14 @@ namespace AI_Project
         Bitmap imageBitmap;
         public List<ImageBlock> blocks = new List<ImageBlock>();
         public float x = 0, y = 0;//for entire image vector
+        string path = "";
 
-        public SectionedImage(Bitmap bm)
+        public SectionedImage(Bitmap bm, string path)
         {
             imageBitmap = bm;
             generateBlocks();
             GetTotalVector();
+            this.path = path;
         }
 
 
