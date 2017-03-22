@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Numerics;
 
 namespace AI_Project
 {
@@ -142,9 +139,11 @@ namespace AI_Project
                 return 0;
             if (j < 0 || j >= blockBitmap.Height)
                 return 0;
-            if (blockBitmap.GetPixel(i, j) == Color.Black)
-                return 1;
-            return 0;
+            //if (blockBitmap.GetPixel(i, j) != Color.White)
+            //return 1;
+            Color pixelColor = blockBitmap.GetPixel(i, j);
+            int colorDistance = -(pixelColor.R - Color.White.R);
+            return colorDistance;
         }
 
         public void NormalizeBlockMagnitude(float min, float max)
