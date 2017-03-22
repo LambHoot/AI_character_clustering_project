@@ -48,6 +48,7 @@
     <Compile Include="GradientHistogram.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="KNN.cs" />
+    <Compile Include="KNNwithBayes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SVM.cs" />
