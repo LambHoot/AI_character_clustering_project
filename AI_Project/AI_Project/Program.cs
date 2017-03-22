@@ -16,6 +16,21 @@ namespace AI_Project
             GradientHistogram.ExtractFeaturesForImages(testing.ToList<string>());
             KNN knn = new KNN();
             knn.RunKNN(training.ToList<string>(), testing.ToList<string>());
+            float acc = HeuristicAccuracy(knn.ClassifiedImagePairs);
+        }
+
+        public static float HeuristicAccuracy(List<ClassifiedTestingImage> ClassifiedImagePairs)
+        {
+            float acc = 0;
+            foreach (ClassifiedTestingImage cti in ClassifiedImagePairs)
+            {
+                string[] training = cti.classifiedTrainingImage.path.Split('\\');
+                string[] testing = cti.testingImage.path.Split('\\');
+                if (training[5].Equals(testing[5]))
+                    acc++;
+            }
+            acc = acc / ClassifiedImagePairs.Count();
+            return acc;
         }
     }
 }

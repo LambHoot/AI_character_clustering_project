@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AI_Project
 {
-    class KNN
+    public class KNN
     {
         public List<SectionedImage> trainingImages = new List<SectionedImage>(), testingImages = new List<SectionedImage>();
         public List<ClassifiedTestingImage> ClassifiedImagePairs = new List<ClassifiedTestingImage>();
@@ -33,8 +33,6 @@ namespace AI_Project
             return ClassifiedImagePairs;
         }
 
-
-
         public void ExtractFeatures(List<string> trainingImagesPaths, List<string> testingImagesPaths)
         {
             trainingImages = GradientHistogram.ExtractFeaturesForImages(trainingImagesPaths);
@@ -45,25 +43,22 @@ namespace AI_Project
         {
             return (float)Math.Sqrt(Math.Pow(i1.x + i2.x, 2) + Math.Pow(i1.y + i2.y, 2));
         }
+    }
+    public class ClassifiedTestingImage
+    {
+        public SectionedImage testingImage, classifiedTrainingImage;
 
-
-        public class ClassifiedTestingImage
+        public ClassifiedTestingImage()
         {
-            public SectionedImage testingImage, classifiedTrainingImage;
-
-            public ClassifiedTestingImage()
-            {
-            }
-
-            public ClassifiedTestingImage(SectionedImage ti, SectionedImage classified)
-            {
-                this.testingImage = ti;
-                this.classifiedTrainingImage = classified;
-            }
         }
 
-
-
-
+        public ClassifiedTestingImage(SectionedImage ti, SectionedImage classified)
+        {
+            this.testingImage = ti;
+            this.classifiedTrainingImage = classified;
+        }
     }
+
+
+
 }

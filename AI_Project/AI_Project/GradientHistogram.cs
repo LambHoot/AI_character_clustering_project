@@ -28,7 +28,7 @@ namespace AI_Project
         Bitmap imageBitmap;
         public List<ImageBlock> blocks = new List<ImageBlock>();
         public float x = 0, y = 0;//for entire image vector
-        string path = "";
+        public string path = "";
 
         public SectionedImage(Bitmap bm, string path)
         {
