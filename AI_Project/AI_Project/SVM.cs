@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace AI_Project
 {
-    class SVM
+    static class SVM
     {
-        public static void Support_Vector_Recognition(Bitmap bm)
+        private static void Support_Vector_Recognition(Bitmap bm)
         {
             #region Feature Extraction
             int[] top = new int[bm.Size.Width], bottom = new int[bm.Size.Width], left = new int[bm.Size.Width], right = new int[bm.Size.Width];
@@ -107,7 +107,7 @@ namespace AI_Project
             #endregion
         }
 
-        public static void OneD_win3_MedianFilter(ref int[] signal)
+        private static void OneD_win3_MedianFilter(ref int[] signal)
         {
             //Previous, Current, Next
             int[] window = new int[3];
@@ -121,5 +121,15 @@ namespace AI_Project
                 signal[i] = window[1]; //take the median
             }
         }
+
+        public static void Run(string[] training, string[] testing)
+        {
+            #region Training
+            #endregion
+
+            #region Testing
+            #endregion
+        }
+
     }
 }
