@@ -17,6 +17,10 @@ namespace AI_Project
             KNN knn = new KNN();
             knn.RunKNN(training.ToList<string>(), testing.ToList<string>());
             float acc = HeuristicAccuracy(knn.ClassifiedImagePairs);
+
+            KNNwithBayes knnb = new KNNwithBayes();
+            knnb.RunKNNwithBayes(training.ToList<string>(), testing.ToList<string>());
+
         }
 
         public static float HeuristicAccuracy(List<ClassifiedTestingImage> ClassifiedImagePairs)
