@@ -13,7 +13,8 @@ namespace AI_Project
             List<SectionedImage> sectionedImages = new List<SectionedImage>();
             foreach (string p in paths)
             {
-                sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p), p));
+                if (p.Split('\\')[5] != "0")
+                    sectionedImages.Add(new SectionedImage(ImageHelper.normalizeImage_42(p), p));
             }
             return sectionedImages;
         }
