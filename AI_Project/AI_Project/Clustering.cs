@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace AI_Project
 {
@@ -56,10 +57,42 @@ namespace AI_Project
             var x = clusterList;
 
             //pass something to draw it as a graph, gg done
-
+            ClusteringOutput(clusterList);
         }
 
+        public static void ClusteringOutput(List<Cluster> clusters)
+        {
+            string outputPath = "..\\..\\Resources\\Output";
+            //clear all files in directory
+            //taken from http://stackoverflow.com/questions/1288718/how-to-delete-all-files-and-folders-in-a-directory
+            DirectoryInfo di = new DirectoryInfo(outputPath);
 
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+
+            int iterator = 0;
+            string newPath = "";
+            foreach(Cluster c in clusters)
+            {
+                newPath = outputPath + "\\" + iterator;
+                Directory.CreateDirectory(newPath);
+                int imageIterator = 0;
+                foreach (SectionedImage image in c.images)
+                {
+                    File.Copy(image.path, newPath + "\\" + imageIterator + ".tif", true);
+                    imageIterator++;
+                }
+                iterator++;
+
+            }
+
+        }
 
         public class Cluster
         {
@@ -115,9 +148,6 @@ namespace AI_Project
 
 
         }
-
-
-
 
     }
 }
