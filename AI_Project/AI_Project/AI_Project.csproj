@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clustering.cs" />
+    <Compile Include="ClusteringStrategy.cs" />
     <Compile Include="GradientHistogram.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="KNN.cs" />
