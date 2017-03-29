@@ -16,7 +16,7 @@ namespace AI_Project
             foreach(SectionedImage image in sectionedImages)
             {
                 int similarClusterIndex = -1;
-                float currentClusterSimilarity = cs.getSimilarity(image, clusterList[0].center) + 1;
+                float currentClusterSimilarity = minSimilarity + 1;
                 for(int i = 0; i < clusterList.Count(); i++)
                 {
                     float nextSimilarity = cs.getSimilarity(image, clusterList[i].center);
