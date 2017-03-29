@@ -17,6 +17,8 @@ namespace AI_Project
         public static void runXOR(string[] trainingPaths, string[] testingPaths)
         {
             #region Training
+            Console.WriteLine("Training...");
+
             Dictionary<string, float[,]> trained = new Dictionary<string, float[,]>();
             string currentNum = "-1";
             foreach (string path in trainingPaths)
@@ -53,28 +55,79 @@ namespace AI_Project
             #endregion
 
             #region Testing
+            Console.WriteLine("Testing...");
 
+
+            currentNum = "0";
+            var success = 0.0f;
+            var sum = 1.0f;
+            foreach (string path in trainingPaths)
+            {
+                Bitmap b = ImageHelper.normalizeImageSize(new Bitmap(path), 64);
+                var tuple = test(ref trained, b);
+                
+                Console.WriteLine("File {0}\n appears to be a {1} with confidence {2}", path, tuple.Item1, tuple.Item2);
+
+                if (path.Substring(42, 1).Equals(currentNum))
+                {
+                    sum++;
+                    success += path.Substring(42, 1).Equals(tuple.Item1) ? 1 : 0;
+                }
+                else
+                {
+                    Console.WriteLine("\n==={0} recognized with accuracy {1}===\n", currentNum, success / sum);
+                    currentNum = path.Substring(42, 1);
+                    sum = 1.0f;
+                    success = path.Substring(42, 1).Equals(tuple.Item1) ? 1 : 0;
+                }
+            }
+            Console.WriteLine("\n==={0} recognized with accuracy {1}===\n", currentNum, success / sum);
             #endregion
         }
 
-        public static void smash(ref float[,] map, Bitmap bm)
+        private static Tuple<string, float> test(ref Dictionary<string, float[,]> training, Bitmap test)
         {
-            for(int y = 0; y < bm.Size.Height; y++)
+            Tuple<string, float> choice = new Tuple<string, float>("none", -1f);
+            foreach (string key in training.Keys)
             {
-                for(int x = 0; x < bm.Size.Width; x++)
+                var current = getConfidence(training[key], ref test);
+                if (current > choice.Item2)
+                    choice = new Tuple<string, float>(key, current);
+            }
+            return choice;
+        }
+
+        private static float getConfidence(float[,] map, ref Bitmap test)
+        {
+            float confidence = 0.0f;
+            for (int x = 0; x < map.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.GetLength(1); y++)
                 {
-                    map[x, y] += bm.GetPixel(x, y).R > Color.Gray.R? 1 : 0;
+                    confidence += test.GetPixel(x, y).R > Color.Gray.R ? map[x, y] : 0.0f;
+                }
+            }
+            return confidence;
+        }
+
+        private static void smash(ref float[,] map, Bitmap bm)
+        {
+            for (int y = 0; y < bm.Size.Height; y++)
+            {
+                for (int x = 0; x < bm.Size.Width; x++)
+                {
+                    map[x, y] += bm.GetPixel(x, y).R > Color.Gray.R ? 1 : 0;
                 }
             }
         }
 
-        public static float[,] normalize(float[,] map)
+        private static float[,] normalize(float[,] map)
         {
             //acquire sum
             float total = 0;
-            for(int x = 0; x < map.GetLength(0); x++)
+            for (int x = 0; x < map.GetLength(0); x++)
             {
-                for(int y = 0; y < map.GetLength(1); y++)
+                for (int y = 0; y < map.GetLength(1); y++)
                 {
                     total += map[x, y];
                 }
