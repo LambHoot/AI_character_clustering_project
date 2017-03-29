@@ -25,9 +25,9 @@ namespace AI_Project
             //CLUSTERING
             ClusteringStrategy edc = new EuclideanDistanceClustering();
             ClusteringStrategy hdc = new HammingDistanceClustering();
-            string[] sevens = Directory.GetFiles("..\\..\\Resources\\Training\\Segmented Digits\\7", "*.*", SearchOption.AllDirectories);
-            //Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(sevens.ToList<string>()), 1000f);
-            Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(sevens.ToList<string>()), 1000f);
+            string[] ones = Directory.GetFiles("..\\..\\Resources\\Training\\Segmented Digits\\1", "*.*", SearchOption.AllDirectories);
+            //Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(ones.ToList<string>()), 1000f);
+            Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(ones.ToList<string>()), 1000f);
 
 
 
