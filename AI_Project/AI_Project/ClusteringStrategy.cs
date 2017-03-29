@@ -21,4 +21,21 @@ namespace AI_Project
         }
     }
 
+
+    class HammingDistanceClustering : ClusteringStrategy
+    {
+
+        public float getSimilarity(SectionedImage i1, SectionedImage i2)
+        {
+            float hammingDistance = 0;
+            for(int i = 0; i < i1.blocks.Count(); i++)
+            {
+                ImageBlock i1Block = i1.blocks[i];
+                ImageBlock i2Block = i2.blocks[i];
+                hammingDistance += Math.Abs(i1Block.GetPixelCustom(4, 4) - i2Block.GetPixelCustom(4, 4));
+            }
+            return hammingDistance;
+        }
+    }
+
 }
