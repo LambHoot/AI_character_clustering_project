@@ -38,4 +38,27 @@ namespace AI_Project
         }
     }
 
+    class SuperHammingDistanceClustering : ClusteringStrategy
+    {
+        float alpha = 0.5f;
+        float beta = 3f;
+        public float getSimilarity(SectionedImage i1, SectionedImage i2)
+        {
+            float superHammingDistance = 0;
+            for (int i = 0; i < i1.blocks.Count(); i++)
+            {
+                ImageBlock i1Block = i1.blocks[i];
+                ImageBlock i2Block = i2.blocks[i];
+                for(int w = 0; w < 7; w++)
+                {
+                    for (int h = 0; h < 7; h++)
+                    {
+                        superHammingDistance += Math.Abs(i1Block.GetPixelCustom(w, h) - i2Block.GetPixelCustom(w, h));
+                    }
+                }
+            }
+            return superHammingDistance;
+        }
+    }
+
 }
