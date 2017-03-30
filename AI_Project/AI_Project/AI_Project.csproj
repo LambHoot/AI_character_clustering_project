@@ -60,7 +60,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Output\" />
+    <Folder Include="Resources\Output\Classification\" />
+    <Folder Include="Resources\Output\Clustering\" />
     <Folder Include="Resources\Testing\" />
     <Folder Include="Resources\Training\" />
   </ItemGroup>

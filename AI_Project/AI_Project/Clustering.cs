@@ -62,7 +62,7 @@ namespace AI_Project
 
         public static void ClusteringOutput(List<Cluster> clusters)
         {
-            string outputPath = "..\\..\\Resources\\Output";
+            string outputPath = "..\\..\\Resources\\Output\\Clustering";
             //clear all files in directory
             //taken from http://stackoverflow.com/questions/1288718/how-to-delete-all-files-and-folders-in-a-directory
             DirectoryInfo di = new DirectoryInfo(outputPath);
