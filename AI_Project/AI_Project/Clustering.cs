@@ -115,6 +115,8 @@ namespace AI_Project
             public void UpdateCenter(ClusteringStrategy cs)
             {
                 float currentCenterSimilarity = 0;
+                int bestCenterIndex = images.IndexOf(center);
+                var x = bestCenterIndex;
                 foreach(SectionedImage image in images)
                 {
                     currentCenterSimilarity += cs.getSimilarity(center, image);
@@ -129,10 +131,11 @@ namespace AI_Project
                     }
                     if(iImageSimilarity < currentCenterSimilarity)
                     {
-                        center = images[i];
-                        UpdateCenter(cs);
+                        currentCenterSimilarity = iImageSimilarity;
+                        bestCenterIndex = i;
                     }
                 }
+                center = images[bestCenterIndex];
             }
 
             public static Cluster mergeClusters(Cluster c1, Cluster c2, ClusteringStrategy cs)
