@@ -53,7 +53,12 @@ namespace AI_Project
                 {
                     for (int h = 0; h < 7; h++)
                     {
-                        superHammingDistance += Math.Abs(i1Block.GetPixelCustom(w, h) - i2Block.GetPixelCustom(w, h));
+                        float i1DistanceFromWhite = i1Block.GetPixelCustom(w, h);
+                        float i2DistanceFromWhite = i2Block.GetPixelCustom(w, h);
+                        float difference = Math.Abs(i1DistanceFromWhite - i2DistanceFromWhite);
+
+                        if(difference != i1DistanceFromWhite && difference != i2DistanceFromWhite)
+                            superHammingDistance += difference;
                     }
                 }
             }

@@ -27,9 +27,9 @@ namespace AI_Project
             ClusteringStrategy hdc = new HammingDistanceClustering();
             ClusteringStrategy shdc = new SuperHammingDistanceClustering();
             string[] allCharacters = Directory.GetFiles("..\\..\\Resources\\Training", "*.*", SearchOption.AllDirectories);
-            //Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(ones.ToList<string>()), 1000f);
-            Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1080f);
-            //Clustering.DoClustering(shdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 75000f);
+            Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1000f);
+            //Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1080f);
+            //Clustering.DoClustering(shdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 12500f);
 
 
 
