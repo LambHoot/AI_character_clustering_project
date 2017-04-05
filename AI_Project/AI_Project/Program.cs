@@ -20,15 +20,15 @@ namespace AI_Project
 
             KNNwithBayes knnb = new KNNwithBayes();
             knnb.RunKNNwithBayes(training.ToList<string>(), testing.ToList<string>());
-
+            XOR.runXOR(training, testing);
 
             //CLUSTERING
             ClusteringStrategy edc = new EuclideanDistanceClustering();
             ClusteringStrategy hdc = new HammingDistanceClustering();
             ClusteringStrategy shdc = new SuperHammingDistanceClustering();
             string[] allCharacters = Directory.GetFiles("..\\..\\Resources\\Training", "*.*", SearchOption.AllDirectories);
-            Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1000f);
-            //Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1080f);
+            //Clustering.DoClustering(edc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1000f);
+            Clustering.DoClustering(hdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 1080f);
             //Clustering.DoClustering(shdc, GradientHistogram.ExtractFeaturesForImages(allCharacters.ToList<string>()), 12500f);
 
 
