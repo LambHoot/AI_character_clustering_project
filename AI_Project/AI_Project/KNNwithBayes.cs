@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AI_Project;
+using System.IO;
 
 namespace AI_Project
 {
@@ -66,7 +67,7 @@ namespace AI_Project
                 string mostCommonClass = currentClasses.GroupBy(i => i).OrderByDescending(grp => grp.Count())
                     .Select(grp => grp.Key).First();
                 //add number and path tupple to output list
-                outputList.Add(new string[] { si.path.Split('\\')[5], mostCommonClass});
+                outputList.Add(new string[] { si.path.Split('\\')[5], mostCommonClass, si.path });
             }
             //compute accuracy in output list
             float accuracy = HeuristicAccuracy(outputList);
@@ -76,10 +77,33 @@ namespace AI_Project
         public static float HeuristicAccuracy(List<string[]> testingAndTrainingPairs)
         {
             float acc = 0;
+
+            string outputPath = "..\\..\\Resources\\Output\\Classification";
+            //clear all files in directory
+            //taken from http://stackoverflow.com/questions/1288718/how-to-delete-all-files-and-folders-in-a-directory
+            DirectoryInfo di = new DirectoryInfo(outputPath);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+            string newPath = "";
+            for (int i = 0; i < 10; i++)
+            {
+                newPath = outputPath + "\\" + i;
+                Directory.CreateDirectory(newPath);
+            }
+            int iterator = 0;
             foreach (string[] cti in testingAndTrainingPairs)
             {
+                File.Copy(cti[2], outputPath + "\\" + cti[1] + "\\"+ iterator + ".tif", true);
                 if (cti[0].Equals(cti[1]))
                     acc++;
+                iterator++;
             }
             acc = acc / testingAndTrainingPairs.Count();
             return acc;

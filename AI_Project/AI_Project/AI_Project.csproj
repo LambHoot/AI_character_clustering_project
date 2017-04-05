@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clustering.cs" />
+    <Compile Include="ClusteringStrategy.cs" />
     <Compile Include="GradientHistogram.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="KNN.cs" />
@@ -58,6 +60,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\Output\Classification\" />
+    <Folder Include="Resources\Output\Clustering\" />
     <Folder Include="Resources\Testing\" />
     <Folder Include="Resources\Training\" />
   </ItemGroup>
