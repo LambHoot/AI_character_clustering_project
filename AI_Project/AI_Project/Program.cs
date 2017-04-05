@@ -13,6 +13,10 @@ namespace AI_Project
         {
             string[] testing = Directory.GetFiles("..\\..\\Resources\\Testing", "*.*", SearchOption.AllDirectories);
             string[] training = Directory.GetFiles("..\\..\\Resources\\Training", "*.*", SearchOption.AllDirectories);
+
+            XOR.runXOR(training, testing);
+
+            /**
             GradientHistogram.ExtractFeaturesForImages(testing.ToList<string>());
             KNN knn = new KNN();
             knn.RunKNN(training.ToList<string>(), testing.ToList<string>());
@@ -20,7 +24,7 @@ namespace AI_Project
 
             KNNwithBayes knnb = new KNNwithBayes();
             knnb.RunKNNwithBayes(training.ToList<string>(), testing.ToList<string>());
-
+            */
         }
 
         public static float HeuristicAccuracy(List<ClassifiedTestingImage> ClassifiedImagePairs)
