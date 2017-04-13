@@ -12,6 +12,7 @@ namespace AI_Project
     {
         public List<SectionedImage> trainingImages = new List<SectionedImage>(), testingImages = new List<SectionedImage>();
         public List<ClassifiedTestingImage> ClassifiedImagePairs = new List<ClassifiedTestingImage>();
+        public float KnnBaccuracy = 0;
         //trainingImages one for each character
 
         public void RunKNNwithBayes(List<string> trainingImagesPaths, List<string> testingImagesPaths)
@@ -74,7 +75,7 @@ namespace AI_Project
 
         }
 
-        public static float HeuristicAccuracy(List<string[]> testingAndTrainingPairs)
+        public float HeuristicAccuracy(List<string[]> testingAndTrainingPairs)
         {
             float acc = 0;
 
@@ -105,8 +106,8 @@ namespace AI_Project
                     acc++;
                 iterator++;
             }
-            acc = acc / testingAndTrainingPairs.Count();
-            return acc;
+            KnnBaccuracy = acc / testingAndTrainingPairs.Count();
+            return KnnBaccuracy;
         }
 
         public float getEuclideanDistance(ImageBlock i1, ImageBlock i2)

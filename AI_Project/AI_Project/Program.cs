@@ -14,12 +14,14 @@ namespace AI_Project
             string[] testing = Directory.GetFiles("..\\..\\Resources\\Testing", "*.*", SearchOption.AllDirectories);
             string[] training = Directory.GetFiles("..\\..\\Resources\\Training", "*.*", SearchOption.AllDirectories);
             GradientHistogram.ExtractFeaturesForImages(testing.ToList<string>());
-            //KNN knn = new KNN();
-            //knn.RunKNN(training.ToList<string>(), testing.ToList<string>());
-            //float acc = HeuristicAccuracy(knn.ClassifiedImagePairs);
+            KNN knn = new KNN();
+            knn.RunKNN(training.ToList<string>(), testing.ToList<string>());
+            float accKnn = HeuristicAccuracy(knn.ClassifiedImagePairs);
 
             KNNwithBayes knnb = new KNNwithBayes();
             knnb.RunKNNwithBayes(training.ToList<string>(), testing.ToList<string>());
+            float accKnnb = knnb.KnnBaccuracy;
+
             XOR.runXOR(training, testing);
 
             //CLUSTERING
